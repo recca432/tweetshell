@@ -31,3 +31,7 @@ sudo ./tweetshell.sh
 chmod +x install.sh
 sudo ./install.sh
 ```
+### Donate!
+Support the authors:
+
+<noscript><a href="https://liberapay.com/thelinuxchoice/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
