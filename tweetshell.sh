@@ -1,7 +1,7 @@
 #!/bin/bash
 # Tweetshell v1.1
 # Coded by: github.com/thelinuxchoice/tweetshell
-# Twitter: @thelinuxchoice
+# Twitter: @linux_choice
 
 trap '\nstore;exit 1' 2
 
