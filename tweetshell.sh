@@ -3,7 +3,7 @@
 # Coded by: github.com/thelinuxchoice/tweetshell
 # Twitter: @linux_choice
 
-trap '\nstore;exit 1' 2
+trap 'store;exit 1' 2
 
 checkroot() {
 if [[ "$(id -u)" -ne 0 ]]; then
