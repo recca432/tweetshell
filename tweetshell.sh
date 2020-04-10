@@ -106,7 +106,7 @@ function bruteforcer() {
 
 
 uagent="Mozilla/5.0 (Series40; NokiaX2-02/10.90; Profile/MIDP-2.1 Configuration/CLDC-1.1) Gecko/20100401 S40OviBrowser/1.0.2.26.11"
-checktor
+#checktor
 count_pass=$(wc -l $wl_pass | cut -d " " -f1)
 printf "\e[1;92mUsername:\e[0m\e[1;77m %s\e[0m\n" $username
 printf "\e[1;92mWordlist:\e[0m\e[1;77m %s (%s)\e[0m\n" $wl_pass $count_pass
